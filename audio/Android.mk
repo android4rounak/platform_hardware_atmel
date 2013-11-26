@@ -18,9 +18,16 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := audio.primary.$(TARGET_BOOTLOADER_BOARD_NAME)
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),sam9g25-ek)
 LOCAL_SRC_FILES := \
-	audio_hw.c \
+	audio_hw_sam9g25.c \
 	audio_route.c
+else
+LOCAL_SRC_FILES := \
+        audio_hw.c \
+        audio_route.c
+endif
+
 LOCAL_C_INCLUDES += \
 	external/tinyalsa/include \
 	external/expat/lib \
